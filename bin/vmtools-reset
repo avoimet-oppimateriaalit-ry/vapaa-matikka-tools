@@ -2,17 +2,21 @@
 
 set -e
 
-cd ~
-BACKUPDIR="$HOME/backup`date --iso-8601=seconds`"
-mkdir "$BACKUPDIR"
-if [ -e ~/.gitconfig ];
+read -p "Oletko varma että haluat alustaa ympäristön (vanhat tiedot varmuuskopioidaan)? [y/n] " CONFIRM
+CONFIRM=${CONFIRM,,}
+if [[ $CONFIRM =~ ^(yes|y)$ ]];
 then
-	mv ~/.gitconfig "$BACKUPDIR"
-fi
-if [ -e ~/vapaa-matikka ];
-then
-	mv ~/vapaa-matikka "$BACKUPDIR"
-fi
+	cd ~
+	BACKUPDIR="$HOME/backup`date --iso-8601=seconds`"
+	mkdir "$BACKUPDIR"
+	if [ -e ~/.gitconfig ];
+	then
+		mv ~/.gitconfig "$BACKUPDIR"
+	fi
+	if [ -e ~/vapaa-matikka ];
+	then
+		mv ~/vapaa-matikka "$BACKUPDIR"
+	fi
 
-echo "Varmuuskopio vanhoista tiedoista tallennettiin hakemistoon $BACKUPDIR, voit nyt konfiguroida uuden ympäristön komennolla 'vmtools-config-git'."
-
+	echo "Varmuuskopio vanhoista tiedoista tallennettiin hakemistoon $BACKUPDIR, voit nyt konfiguroida uuden ympäristön komennolla 'vmtools-config-git'."
+fi
