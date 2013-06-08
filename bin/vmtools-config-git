@@ -43,6 +43,9 @@ then
 	git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka.git
 	cd vapaa-matikka
 	git submodule update --init
+	cp scripts/pre-commit .git/hooks || true
 fi
+
+echo "Git konfiguroitu onnistuneesti. vapaa-matikka-repo löytyy kotihakemistosta."
 
 trap - INT TERM EXIT
