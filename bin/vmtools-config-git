@@ -2,6 +2,8 @@
 
 set -e
 
+trap 'echo "Osan asetuksista muuttaminen epäonnistui! Aja komento uudelleen."; exit 1' INT TERM EXIT
+
 echo "Anna commiteissa näkyvät tiedot:"
 read -p "  Nimi: " NAME
 read -p "  Email: " EMAIL
@@ -19,7 +21,7 @@ then
 	git config --global credential.helper "cache --timeout=$CACHETIME"
 	CACHETIME="$CACHETIME sekuntia"
 else
-	git config --global --unset credential.helper
+	git config --global --unset credential.helper || true
 	CACHETIME="ei käytössä"
 fi
 
@@ -31,7 +33,7 @@ git config --global user.name
 echo -n "  Email: "
 git config --global user.email
 echo "  Salasanavälimuisti: $CACHETIME"
-echo "Aja komento 'vmtools-config-git' mikäli haluat muuttaa näitä tietoja."
+echo "Aja komento uudelleen mikäli haluat muuttaa näitä tietoja."
 
 if [ ! -e ~/vapaa-matikka ];
 then
