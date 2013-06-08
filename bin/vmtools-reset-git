@@ -14,6 +14,4 @@ then
 	mv ~/vapaa-matikka "$BACKUPDIR"
 fi
 
-git config --global credential.helper 'cache --timeout=7200'
-
 vmtools-config-git
