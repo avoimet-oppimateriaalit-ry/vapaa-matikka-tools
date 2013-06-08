@@ -44,3 +44,5 @@ then
 	cd vapaa-matikka
 	git submodule update --init
 fi
+
+trap - INT TERM EXIT

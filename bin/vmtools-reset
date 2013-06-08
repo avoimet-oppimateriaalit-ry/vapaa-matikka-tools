@@ -2,6 +2,8 @@
 
 set -e
 
+trap 'echo "Alustus epäonnistui."; exit 1' INT TERM EXIT
+
 read -p "Oletko varma että haluat alustaa ympäristön (vanhat tiedot varmuuskopioidaan)? [y/n] " CONFIRM
 CONFIRM=${CONFIRM,,}
 if [[ $CONFIRM =~ ^(yes|y)$ ]];
@@ -22,3 +24,5 @@ then
 
 	echo "Varmuuskopio vanhoista tiedoista tallennettiin hakemistoon $BACKUPDIR, voit nyt konfiguroida uuden ympäristön komennolla 'vmtools-config-git'."
 fi
+
+trap - INT TERM EXIT
