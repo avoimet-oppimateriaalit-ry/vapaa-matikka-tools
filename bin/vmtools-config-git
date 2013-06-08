@@ -6,9 +6,10 @@ read -p "  Nimi:  " NAME
 read -p "  Email: " EMAIL
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
+echo
 echo "Seuraavat tiedot asetettiin:"
 echo -n "  Nimi:  "
 git config --global user.name
 echo -n "  Email: "
 git config --global user.email
-echo "Aja komento 'git-setup' mikäli haluat muuttaa tietoja."
+echo "Aja komento 'vmtools-config-git' mikäli haluat muuttaa näitä tietoja."
