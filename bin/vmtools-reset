@@ -18,5 +18,7 @@ then
 		mv ~/vapaa-matikka "$BACKUPDIR"
 	fi
 
+	git credential-cache exit
+
 	echo "Varmuuskopio vanhoista tiedoista tallennettiin hakemistoon $BACKUPDIR, voit nyt konfiguroida uuden ympäristön komennolla 'vmtools-config-git'."
 fi
