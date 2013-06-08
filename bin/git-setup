@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+echo "Anna commiteissa näkyvät tiedot:"
+read -p "  Nimi: " NAME
+read -p "  Sähköpostiosoite: " EMAIL
+git config --global user.name "$NAME"
+git config --global user.email "$EMAIL"
+echo "Seuraavat tiedot asetettiin:"
+echo -n "  "
+git config --global user.name
+echo -n "  "
+git config --global user.email
+echo "Aja komento 'git-setup' mikäli haluat muuttaa tietoja."
