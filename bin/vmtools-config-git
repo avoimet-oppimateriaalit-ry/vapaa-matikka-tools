@@ -16,3 +16,11 @@ git config --global user.name
 echo -n "  Email: "
 git config --global user.email
 echo "Aja komento 'vmtools-config-git' mikäli haluat muuttaa näitä tietoja."
+
+if [ ! -f ~/vapaa-matikka ];
+then
+	echo
+	echo "Repoa vapaa-matikka ei ole vielä kloonattu, kloonataan se nyt:"
+	cd ~
+	git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka.git
+fi
