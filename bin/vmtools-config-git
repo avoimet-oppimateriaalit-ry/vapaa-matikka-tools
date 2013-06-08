@@ -2,20 +2,35 @@
 
 set -e
 
-git config --global credential.helper 'cache --timeout=7200'
-git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
-
 echo "Anna commiteissa näkyvät tiedot:"
-read -p "  Nimi:  " NAME
+read -p "  Nimi: " NAME
 read -p "  Email: " EMAIL
+echo
+echo "Haluatko, että git tallentaa salasanasi väliaikaisesti tietokoneen muistiin?"
+echo "Jätä tyhjäksi jos et halua salasanavälimuistia, muuten anna välimuistin kesto sekunteina (esim 7200 vastaa 2 tuntia)."
+read -p "  Valinta: " CACHETIME
+echo
+
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
-echo
-echo "Seuraavat tiedot asetettiin:"
-echo -n "  Nimi:  "
+
+if [[ $CACHETIME =~ ^-?[0-9]+$ ]];
+then
+	git config --global credential.helper "cache --timeout=$CACHETIME"
+	CACHETIME="$CACHETIME sekuntia"
+else
+	git config --global --unset credential.helper
+	CACHETIME="ei käytössä"
+fi
+
+git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
+
+echo "Yhteenveto valituista asetuksista:"
+echo -n "  Nimi: "
 git config --global user.name
 echo -n "  Email: "
 git config --global user.email
+echo "  Salasanavälimuisti: $CACHETIME"
 echo "Aja komento 'vmtools-config-git' mikäli haluat muuttaa näitä tietoja."
 
 if [ ! -e ~/vapaa-matikka ];
@@ -25,6 +40,5 @@ then
 	cd ~
 	git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka.git
 	cd vapaa-matikka
-	git submodule init
-	git submodule update
+	git submodule update --init
 fi
