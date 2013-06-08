@@ -3,13 +3,13 @@
 set -e
 
 cd ~
-BACKUPDIR="$HOME/backup `date`"
+BACKUPDIR="$HOME/backup`date --iso-8601=seconds`"
 mkdir "$BACKUPDIR"
-if [ -f ~/.gitconfig ];
+if [ -e ~/.gitconfig ];
 then
 	mv ~/.gitconfig "$BACKUPDIR"
 fi
-if [ -f ~/vapaa-matikka ];
+if [ -e ~/vapaa-matikka ];
 then
 	mv ~/vapaa-matikka "$BACKUPDIR"
 fi

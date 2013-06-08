@@ -3,6 +3,7 @@
 set -e
 
 git config --global credential.helper 'cache --timeout=7200'
+git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
 
 echo "Anna commiteissa näkyvät tiedot:"
 read -p "  Nimi:  " NAME
@@ -17,10 +18,13 @@ echo -n "  Email: "
 git config --global user.email
 echo "Aja komento 'vmtools-config-git' mikäli haluat muuttaa näitä tietoja."
 
-if [ ! -f ~/vapaa-matikka ];
+if [ ! -e ~/vapaa-matikka ];
 then
 	echo
 	echo "Repoa vapaa-matikka ei ole vielä kloonattu, kloonataan se nyt:"
 	cd ~
 	git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka.git
+	cd vapaa-matikka
+	git submodule init
+	git submodule update
 fi
