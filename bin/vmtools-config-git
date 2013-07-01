@@ -35,17 +35,20 @@ git config --global user.email
 echo "  Salasanavälimuisti: $CACHETIME"
 echo "Aja komento uudelleen mikäli haluat muuttaa näitä tietoja."
 
-if [ ! -e ~/vapaa-matikka ];
-then
-	echo
-	echo "Repoa vapaa-matikka ei ole vielä kloonattu, kloonataan se nyt:"
-	cd ~
-	git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka.git
-	cd vapaa-matikka
-	git submodule update --init
-	cp scripts/pre-commit .git/hooks || true
-fi
+for book in maa1 maa2 maa3 maa4 maa11
+do
+	if [ ! -e ~/vapaa-matikka-$book ];
+	then
+		echo
+		echo "Repoa vapaa-matikka-$book ei ole vielä kloonattu, kloonataan se nyt:"
+		cd ~
+		git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka-$book.git
+		cd vapaa-matikka-$book
+		git submodule update --init
+		cp scripts/pre-commit .git/hooks || true
+	fi
+done
 
-echo "Git konfiguroitu onnistuneesti. vapaa-matikka-repo löytyy kotihakemistosta."
+echo "Git konfiguroitu onnistuneesti. vapaa-matikka-repot löytyvät kotihakemistosta."
 
 trap - INT TERM EXIT

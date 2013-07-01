@@ -15,9 +15,9 @@ then
 	then
 		mv ~/.gitconfig "$BACKUPDIR"
 	fi
-	if [ -e ~/vapaa-matikka ];
+	if test -n "$(shopt -s nullglob; echo ~/vapaa-matikka*)"
 	then
-		mv ~/vapaa-matikka "$BACKUPDIR"
+		mv ~/vapaa-matikka* "$BACKUPDIR"
 	fi
 
 	git credential-cache exit
