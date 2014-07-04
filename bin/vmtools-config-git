@@ -35,15 +35,17 @@ git config --global user.email
 echo "  Salasanavälimuisti: $CACHETIME"
 echo "Aja komento uudelleen mikäli haluat muuttaa näitä tietoja."
 
-for book in maa1 maa2 maa3 maa4 maa7 maa11
+vm=vapaa-matikka
+
+for book in ${vm}-maa1 ${vm}-maa2 ${vm}-maa3 ${vm}-maa4 ${vm}-maa5 ${vm}-maa7 ${vm}-maa9 ${vm}-maa11 ${vm}-maa12 ${vm}-maa13
 do
-	if [ ! -e ~/vapaa-matikka-$book ];
+	if [ ! -e ~/$book ];
 	then
 		echo
-		echo "Repoa vapaa-matikka-$book ei ole vielä kloonattu, kloonataan se nyt:"
+		echo "Repoa $book ei ole vielä kloonattu, kloonataan se nyt:"
 		cd ~
-		git clone https://github.com/avoimet-oppimateriaalit-ry/vapaa-matikka-$book.git
-		cd vapaa-matikka-$book
+		git clone https://github.com/avoimet-oppimateriaalit-ry/$book.git
+		cd $book
 		git submodule update --init
 		cp ~/vapaa-matikka-tools/bin/pre-commit .git/hooks || true
 	fi
