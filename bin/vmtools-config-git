@@ -35,9 +35,9 @@ git config --global user.email
 echo "  Salasanavälimuisti: $CACHETIME"
 echo "Aja komento uudelleen mikäli haluat muuttaa näitä tietoja."
 
-vm=vapaa-matikka
+vma=vapaa-matikka-maa
 
-for book in ${vm}-maa1 ${vm}-maa2 ${vm}-maa3 ${vm}-maa4 ${vm}-maa5 ${vm}-maa7 ${vm}-maa9 ${vm}-maa11 ${vm}-maa12 ${vm}-maa13
+for book in ${vma}1 ${vma}2 ${vma}3 ${vma}4 ${vma}5 ${vma}6 ${vma}7 ${vma}8 ${vma}9 ${vma}10 ${vma}11 ${vma}12 ${vma}13 ${vma}14
 do
 	if [ ! -e ~/$book ];
 	then
